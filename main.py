@@ -7,9 +7,9 @@ import pyttsx3
 # tts stuff
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)
+engine.setProperty('voice', voices[0].id)
 # print(voices[1].id)
-engine.setProperty('rate', 150)
+engine.setProperty('rate', 180)
 # engine.say("Hello, How are you ?")
 engine.runAndWait()
 
@@ -38,12 +38,14 @@ def SpeechToText():
             text = r.recognize_google(audio)
             print(f"you said: {text}")
             print("Typing test in 3 secs")
-            speak("Typing test in 3 secs")
+            speak("Typing test in 3 seconds")
             time.sleep(3)
             p.typewrite(text)
         except:
             print("did not hear you")
             speak("did not hear you")
+
+
     
 #-------------------------------------------------------------
 #main code 
@@ -64,21 +66,61 @@ while 1:
             break
 
         else:
+
             if text == "hello":
                 print("Hi! how are you?")
                 speak("Hi! how are you?")
                 continue
 
+            elif text == "hai":
+                print("Hi! how are you?")
+                speak("Hi! how are you?")
+                continue
+
+            elif text == "hi":
+                print("Hi! how are you?")
+                speak("Hi! how are you?")
+                continue
+
+            elif text == "I am fine":
+                speak("I'm also fine")
+                print("I'm also fine")
+                continue
+
+            elif text == "I am fine what about you":
+                speak("I'm also fine")
+                print("I'm also fine")
+                continue
+            
+            elif text == "hi how are you":
+                speak("I'm fine")
+                print("I'm fine")
+                continue
+
+            elif text == "How are you?":
+                speak("I'm fine")
+                print("I'm fine")
+                continue
+
+
             elif text == "type":
                 SpeechToText()
                 continue
 
+            check_list = ["who", "how", "when", "what"]
+            for i in check_list:
+                if i in text:
+                    print("Is that a question?")
+                    speak("Is that a question?")
+                    continue
+            
             else:
-                print("I could not understand you")       
+                print("I'm not sure I understand") 
+                speak("I'm not sure I understand")      
                 continue
 
 
         
     except:
-        print("\n\nSorry could not recognize what you said")
+        print("\n\nSorry couldn't understand you, can you repeat?")
         
