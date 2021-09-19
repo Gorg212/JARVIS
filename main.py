@@ -43,14 +43,16 @@ while 1:
         text = r.recognize_google(audio)
         print(f"you said: {text}")
 
-        if text == "stop" or text == "bye" or text == "exit":
+        if text == "stop" or text == "bye" or text == "exit" or text == "shut down":
             print("\n\nShutting down")
             speak("Bye have a good day!")
             break
 
         else:
+            if "help" in text:
+                speak("I can Do speech to text, and talk with you, also you can search google and open app from me, just ask me to open Chrome or Try converting speech to text, by saying type then your text. Example Type hello world")
 
-            if text == "hello" or text == "hai" or text == "hi":
+            elif text == "hello" or text == "hai" or text == "hi":
                 print("Hi! how are you?")
                 speak("Hi! how are you?")
                 continue
@@ -80,11 +82,24 @@ while 1:
                     speak("Opening chrome")
                     path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
                     os.startfile(path)
-                
-                elif 'Teams' in text:
-                    print("Feature hasn't been implemented yet")
-                    speak("Feature hasn't been implemented yet.")
 
+                if 'Firefox' in text:
+                    print("Opening Firefox")
+                    speak("Opening Firefox")
+                    path = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+                    os.startfile(path)
+                
+                if 'Teams' or 'Team' in text:
+                    print("Opening Teams")
+                    speak("Opening Teams.")
+                    path = "C:\\Users\\Gorg\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe"
+                    os.startfile(path)
+
+                if 'Discord' in text:
+                    print("Opening Discord")
+                    speak("Opening Discord")
+                    path = "C:\\Users\\Gorg\\AppData\\Local\\Discord\\app-1.0.9002\\Discord.exe"
+                    os.startfile(path)
             
             else:
                 print("I'm not sure I understand") 
