@@ -1,4 +1,5 @@
 #! python3.6
+import os
 import speech_recognition as sr
 import pyautogui as p 
 import time
@@ -17,7 +18,7 @@ def speak(str):
     engine.say(str)
     engine.runAndWait()
 
-speak("Hello, What's going on")
+speak("Greetings master, how ,may I help you?")
 
 # r = sr.Recognizer()
 # with sr.Microphone() as source:
@@ -28,24 +29,6 @@ speak("Hello, What's going on")
 
 #big commands
 
-def SpeechToText():
-    STT = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("What do you want to convert to text?")
-        speak("What do you want to convert to text?")
-        audio = r.listen(source)
-        try:
-            text = r.recognize_google(audio)
-            print(f"you said: {text}")
-            print("Typing test in 3 secs")
-            speak("Typing test in 3 seconds")
-            time.sleep(3)
-            p.typewrite(text)
-        except:
-            print("did not hear you")
-            speak("did not hear you")
-
-
     
 #-------------------------------------------------------------
 #main code 
@@ -53,66 +36,55 @@ def SpeechToText():
 while 1:
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Speak Anything :")
+        print("\nSpeak Anything :")
         audio = r.listen(source)
 
     try:
         text = r.recognize_google(audio)
         print(f"you said: {text}")
 
-        if text == "bye":
+        if text == "stop" or text == "bye" or text == "exit":
             print("\n\nShutting down")
             speak("Bye have a good day!")
             break
 
         else:
 
-            if text == "hello":
+            if text == "hello" or text == "hai" or text == "hi":
                 print("Hi! how are you?")
                 speak("Hi! how are you?")
                 continue
 
-            elif text == "hai":
-                print("Hi! how are you?")
-                speak("Hi! how are you?")
-                continue
-
-            elif text == "hi":
-                print("Hi! how are you?")
-                speak("Hi! how are you?")
-                continue
-
-            elif text == "I am fine":
-                speak("I'm also fine")
-                print("I'm also fine")
-                continue
-
-            elif text == "I am fine what about you":
+            elif text == "I am fine" or text == "I am fine what about you" or text == "I am fine how about you":
                 speak("I'm also fine")
                 print("I'm also fine")
                 continue
             
-            elif text == "hi how are you":
+            elif text == "hi how are you" or text == "How are you":
                 speak("I'm fine")
                 print("I'm fine")
                 continue
 
-            elif text == "How are you?":
-                speak("I'm fine")
-                print("I'm fine")
+            elif "type" in text:
+                # SpeechToText()
+                text = text.replace("type", "")
+                speak("Typing text in 3 seconds...")
+                print("Typing text in 3 seconds...")
+                time.sleep(3)
+                p.typewrite(text)
                 continue
 
+            elif 'open' in text:
+                if 'Chrome' in text:
+                    print("Opening chrome")
+                    speak("Opening chrome")
+                    path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+                    os.startfile(path)
+                
+                elif 'Teams' in text:
+                    print("Feature hasn't been implemented yet")
+                    speak("Feature hasn't been implemented yet.")
 
-            elif text == "type":
-                SpeechToText()
-                continue
-
-            check_list = ["who", "how", "when", "what"]
-            for i in check_list:
-                if i in text:
-                    print("Is that a question?")
-                    speak("Is that a question?")
-                    continue
             
             else:
                 print("I'm not sure I understand") 
@@ -122,5 +94,5 @@ while 1:
 
         
     except:
-        print("\n\nSorry couldn't understand you, can you repeat?")
+        print("\nWaiting for your response")
         
