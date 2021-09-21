@@ -38,6 +38,7 @@ with sr.Microphone() as source:
 
 #MAIN CODE 
 
+
 while 1:
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -47,6 +48,11 @@ while 1:
     try:
         text = r.recognize_google(audio)
         print(f"you said: {text}")
+
+        #Variables
+        first_word = text.split()[0]
+
+        #CODE
 
         if 'quit' in text or 'bye' in text or 'exit' in text or 'stop' in text:
             print("\n\nShutting down")
@@ -67,9 +73,13 @@ while 1:
             print("I'm also fine")
             continue
         
-        elif text == "hi how are you" or text == "How are you":
-            speak("I'm fine")
-            print("I'm fine")
+        elif 'how' in text:
+            if 'how are you' in text:
+                speak("I'm fine what about you")
+                print("I'm fine what about you")
+            else:
+                speak("Here's what I found on the web!")
+                pywhatkit.search(text)
             continue
         
         elif "type" in text:
@@ -105,8 +115,8 @@ while 1:
                     speak("Opening Discord")
                     path = "C:\\Users\\Gorg\\AppData\\Local\\Discord\\app-1.0.9002\\Discord.exe"
                     os.startfile(path)
-            
-        elif 'who' in text or 'what' in text or 'when' in text or 'why' in text or 'where'in text or 'search' in text:
+           
+        elif first_word == 'who' or first_word == 'what' or first_word == 'why' or first_word == 'when' or first_word == 'where' or first_word == 'search':
             text = text.replace('search', '')
             speak("Here's what I found on the web!")
             pywhatkit.search(text)
